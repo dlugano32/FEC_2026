@@ -22,21 +22,33 @@
             }
           },
           {
+<<<<<<< HEAD
+            "id": "11f6d18a5743741e",
+=======
             "id": "b18070cb6d8997c1",
+>>>>>>> d3443815c424de8187670c4af96f862b1f993a13
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
+<<<<<<< HEAD
+                "file": "Clase#6 23-7.md",
+=======
                 "file": "Clase #5 21-7.md",
+>>>>>>> d3443815c424de8187670c4af96f862b1f993a13
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
+<<<<<<< HEAD
+              "title": "Clase#6 23-7"
+=======
               "title": "Clase #5 21-7"
+>>>>>>> d3443815c424de8187670c4af96f862b1f993a13
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -198,6 +210,15 @@
       "bases:Crear nueva base": false
     }
   },
+<<<<<<< HEAD
+  "active": "11f6d18a5743741e",
+  "lastOpenFiles": [
+    "Pasted image 20260723090923.png",
+    "Clase#4 16-7.md",
+    "Clase#6 23-7.md",
+    "Pasted image 20260716092158.png",
+    "Clase#2 7-7.md",
+=======
   "active": "b18070cb6d8997c1",
   "lastOpenFiles": [
     "images/Pasted image 20260721091520.png",
@@ -205,6 +226,7 @@
     "Clase #5 21-7.md",
     "Clase#2 7-7.md",
     "images/Pasted image 20260716092158.png",
+>>>>>>> d3443815c424de8187670c4af96f862b1f993a13
     "Pasted image 20260707090828.png",
     "Pasted image 20260707085947.png",
     "Pasted image 20260707085814.png",
