@@ -17,15 +17,11 @@ class GF2m:
             raise ValueError("m debe ser un entero positivo")
 
         if not 0 <= primitive_poly < (1 << m):
-            raise ValueError(
-                f"El polinomio debe representarse con exactamente {m} bits"
-            )
+            raise ValueError(f"El polinomio debe representarse con exactamente {m} bits")
 
         # Un polinomio primitivo debe tener término independiente 1.
         if primitive_poly & 1 == 0:
-            raise ValueError(
-                "El polinomio primitivo debe tener término independiente igual a 1"
-            )
+            raise ValueError("El polinomio primitivo debe tener término independiente igual a 1")
 
         self.m = m
         self.primitive_poly = primitive_poly
@@ -63,8 +59,7 @@ class GF2m:
         result = 0
 
         while b != 0:
-            # Si el bit menos significativo de b es 1,
-            # se agrega el polinomio a al resultado.
+            # Si el bit menos significativo de b es 1, se agrega el polinomio a al resultado.
             if b & 1:
                 result ^= a
 
@@ -127,9 +122,7 @@ class GF2m:
         self._validate_value(a)
 
         if a == 0:
-            raise ZeroDivisionError(
-                "El elemento 0 no tiene inverso multiplicativo"
-            )
+            raise ZeroDivisionError("El elemento 0 no tiene inverso multiplicativo")
 
         return self.power(a, self.order - 2)
 
@@ -153,9 +146,7 @@ class GF2m:
             raise TypeError("Los elementos del campo deben ser enteros")
 
         if not 0 <= value < self.order:
-            raise ValueError(
-                f"El elemento debe estar en el rango [0, {self.order - 1}]"
-            )
+            raise ValueError(f"El elemento debe estar en el rango [0, {self.order - 1}]")
 
     def __repr__(self) -> str:
         return (
@@ -176,19 +167,14 @@ class GFElement:
 
     def inverse(self) -> "GFElement":
         """Devuelve el inverso multiplicativo del elemento."""
-        return GFElement(
-            self.field,
-            self.field.inverse(self.value)
-        )
+
+        return GFElement(self.field, self.field.inverse(self.value))
 
     def __add__(self, other: "GFElement") -> "GFElement":
         """Suma dos elementos pertenecientes al mismo campo."""
         self._validate_other(other)
 
-        return GFElement(
-            self.field,
-            self.field.add(self.value, other.value)
-        )
+        return GFElement(self.field, self.field.add(self.value, other.value))
 
     def __sub__(self, other: "GFElement") -> "GFElement":
         """
@@ -202,36 +188,24 @@ class GFElement:
         """Multiplica dos elementos pertenecientes al mismo campo."""
         self._validate_other(other)
 
-        return GFElement(
-            self.field,
-            self.field.multiply(self.value, other.value)
-        )
+        return GFElement(self.field, self.field.multiply(self.value, other.value))
 
     def __truediv__(self, other: "GFElement") -> "GFElement":
         """Divide dos elementos pertenecientes al mismo campo."""
         self._validate_other(other)
 
-        return GFElement(
-            self.field,
-            self.field.divide(self.value, other.value)
-        )
+        return GFElement(self.field, self.field.divide(self.value, other.value))
 
     def __pow__(self, exponent: int) -> "GFElement":
         """Eleva el elemento a una potencia entera no negativa."""
-        return GFElement(
-            self.field,
-            self.field.power(self.value, exponent)
-        )
+        return GFElement(self.field, self.field.power(self.value, exponent))
 
     def __eq__(self, other) -> bool:
         """Compara dos elementos del mismo campo."""
         if not isinstance(other, GFElement):
             return False
 
-        return (
-            self.field is other.field
-            and self.value == other.value
-        )
+        return (self.field is other.field and self.value == other.value)
 
     def __int__(self) -> int:
         """Devuelve la representación entera del elemento."""
@@ -248,11 +222,7 @@ class GFElement:
         Verifica que el otro operando sea un GFElement perteneciente al mismo campo.
         """
         if not isinstance(other, GFElement):
-            raise TypeError(
-                "Las operaciones solo se permiten entre elementos GFElement"
-            )
+            raise TypeError("Las operaciones solo se permiten entre elementos GFElement")
 
         if self.field is not other.field:
-            raise ValueError(
-                "Los elementos deben pertenecer al mismo campo"
-            )
+            raise ValueError("Los elementos deben pertenecer al mismo campo")
