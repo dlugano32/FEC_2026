@@ -1,68 +1,41 @@
 {
   "main": {
-    "id": "00129d7eb4d2e9e6",
+    "id": "1fc2e63c32806b6f",
     "type": "split",
     "children": [
       {
-        "id": "342a80e0ed8c25ed",
+        "id": "01c53e31cc8e0f78",
         "type": "tabs",
         "children": [
           {
-            "id": "c80d0740974cd0c7",
+            "id": "ab56cc68077d90d8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Clase#4 16-7.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Clase#4 16-7"
-            }
-          },
-          {
-<<<<<<< HEAD
-            "id": "11f6d18a5743741e",
-=======
-            "id": "b18070cb6d8997c1",
->>>>>>> d3443815c424de8187670c4af96f862b1f993a13
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-<<<<<<< HEAD
                 "file": "Clase#6 23-7.md",
-=======
-                "file": "Clase #5 21-7.md",
->>>>>>> d3443815c424de8187670c4af96f862b1f993a13
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-<<<<<<< HEAD
               "title": "Clase#6 23-7"
-=======
-              "title": "Clase #5 21-7"
->>>>>>> d3443815c424de8187670c4af96f862b1f993a13
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "b2cfd4e530be20ee",
+    "id": "57ecb218e307b622",
     "type": "split",
     "children": [
       {
-        "id": "9c52473c7dcc0f31",
+        "id": "7377e2196ab25d33",
         "type": "tabs",
         "children": [
           {
-            "id": "3f0d987cfee1251c",
+            "id": "5c5847433b3a75e9",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -71,11 +44,11 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorador de archivos"
+              "title": "Files"
             }
           },
           {
-            "id": "4e13889b6f8897d4",
+            "id": "5c8651c3d89b15a0",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -92,7 +65,7 @@
             }
           },
           {
-            "id": "f06bbf96c9d73695",
+            "id": "ee2cda41f8dd4aae",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -108,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "e8cc27acfadaa56f",
+    "id": "b0479c34446edeb9",
     "type": "split",
     "children": [
       {
-        "id": "27c7de41a9d686d9",
+        "id": "5a1c08f8ba988fad",
         "type": "tabs",
         "children": [
           {
-            "id": "d0db85e051bed9f7",
+            "id": "6d156a0c847a2cad",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Clase #1_2-6.md",
+                "file": "Clase#6 23-7.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Clase #1_2-6"
+              "title": "Backlinks for Clase#6 23-7"
             }
           },
           {
-            "id": "8eb2e34c386c5394",
+            "id": "f564030d514e8f02",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Clase #1_2-6.md",
+                "file": "Clase#6 23-7.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Clase #1_2-6"
+              "title": "Outgoing links from Clase#6 23-7"
             }
           },
           {
-            "id": "f5637690b28ea19d",
+            "id": "a173c82bcec0a88a",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -164,7 +137,7 @@
             }
           },
           {
-            "id": "aa2806df98796e34",
+            "id": "74149ad191ec385c",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -178,18 +151,18 @@
             }
           },
           {
-            "id": "c4b79692b8942070",
+            "id": "6ca2ed9f7760e3cb",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Clase #1_2-6.md",
+                "file": "Clase#6 23-7.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Clase #1_2-6"
+              "title": "Outline of Clase#6 23-7"
             }
           }
         ]
@@ -201,43 +174,15 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Abrir selector rápido": false,
-      "graph:Abrir vista gráfica": false,
-      "canvas:Crear nuevo lienzo": false,
-      "daily-notes:Abrir la nota de hoy": false,
-      "templates:Insertar plantilla": false,
-      "command-palette:Abrir paleta de comandos": false,
-      "bases:Crear nueva base": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
     }
   },
-<<<<<<< HEAD
-  "active": "11f6d18a5743741e",
-  "lastOpenFiles": [
-    "Pasted image 20260723090923.png",
-    "Clase#4 16-7.md",
-    "Clase#6 23-7.md",
-    "Pasted image 20260716092158.png",
-    "Clase#2 7-7.md",
-=======
-  "active": "b18070cb6d8997c1",
-  "lastOpenFiles": [
-    "images/Pasted image 20260721091520.png",
-    "Clase#4 16-7.md",
-    "Clase #5 21-7.md",
-    "Clase#2 7-7.md",
-    "images/Pasted image 20260716092158.png",
->>>>>>> d3443815c424de8187670c4af96f862b1f993a13
-    "Pasted image 20260707090828.png",
-    "Pasted image 20260707085947.png",
-    "Pasted image 20260707085814.png",
-    "Pasted image 20260707084614.png",
-    "Pasted image 20260707084258.png",
-    "Clase#1 2-7.md",
-    "images/Pasted image 20260703133606.png",
-    "images/Pasted image 20260703133255.png",
-    "images/Pasted image 20260703132954.png",
-    "Pasted image 20260703132937.png",
-    "images",
-    "Welcome.md"
-  ]
+  "active": "ab56cc68077d90d8",
+  "lastOpenFiles": []
 }
