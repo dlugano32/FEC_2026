@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Clase#6 23-7.md",
+                "file": "Clase#4 16-7.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Clase#6 23-7"
+              "title": "Clase#4 16-7"
             }
           }
         ]
@@ -184,5 +184,7 @@
     }
   },
   "active": "ab56cc68077d90d8",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Clase#6 23-7.md"
+  ]
 }

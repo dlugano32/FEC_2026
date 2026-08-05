@@ -32,6 +32,9 @@ class GF2m:
         # Máscara para conservar solamente los m bits inferiores.
         self.mask = self.order - 1
 
+        # Tablas de exponenciación y logaritmo
+        self.exp_table, self.log_table = self._build_tables()
+
     def element(self, value: int) -> "GFElement":
         """Crea un elemento perteneciente a este campo."""
         return GFElement(self, value)
@@ -139,6 +142,71 @@ class GF2m:
             raise ZeroDivisionError("No se puede dividir por cero")
 
         return self.multiply(a, self.inverse(b))
+
+    def exp(self, exponent: int) -> int:
+        """
+        Devuelve el exponente de alpha
+        """
+
+        if not isinstance(exponent, int):
+            raise TypeError("El exponente debe ser un entero")
+
+        return self.exp_table[exponent % (self.order - 1)]
+
+    def log(self, value: int) -> int:
+        """
+        Devuelve el logaritmo de alpha.
+        """
+
+        self._validate_value(value)
+
+        if value == 0:
+            raise ValueError("El elemento cero no tiene logaritmo")
+
+        return self.log_table[value]
+
+
+    def _build_tables(self) -> tuple[list[int], list[int]]:
+        """
+        Construye las tablas de exponenciación y logaritmo.
+
+        exp_table[i] = representación polinómica de alpha^i
+        
+        log_table[a] = i tal que a = alpha^i
+
+        La construcción también verifica que el polinomio sea primitivo:
+        las potencias de alpha deben recorrer todos los elementos no nulos
+        sin repetirse antes de volver a 1.
+        """
+
+        # El grupo multiplicativo tiene 2^m - 1 elementos.
+        multiplicative_order = self.order - 1
+
+        exp_table = [0]  * multiplicative_order     # Representa unicamente los elementos no nulos
+        log_table = [-1] * self.order               # Para que log_table[0] = -1
+
+        current = 1     # alpha^0 = 1
+
+        for exponent in range(multiplicative_order):
+            # Si el valor del logaritmo es distinto a -1 significa que el elemento ya apareció como potencia de alfa
+            # Por lo tanto se estaría repitiendo antes de 2^m-1 y el polinomio no es primitivo
+            if log_table[current] != -1:
+                raise ValueError(f"El polinomio proporcionado no es primitivo: alpha^{exponent}"
+                                 f"repite el valor 0b{current:0{self.m}b}"
+                )
+
+            exp_table[exponent] = current
+            log_table[current] = exponent
+
+            # Multiplicar por alpha
+            current = self.multiply(current, 0b10)
+
+        # Si el valor de current, que es una potencia de alpha, volvió a 1 antes de 2^m-1 significa que el polinomio no
+        # es primitivo
+        if current != 1:
+            raise ValueError(f"El polinomio proporcionado no es primitivo: alpha^{multiplicative_order} != 1")
+
+        return exp_table, log_table
 
     def _validate_value(self, value: int) -> None:
         """Verifica que el entero pertenezca al rango del campo."""

@@ -1,5 +1,5 @@
-from GF2m import GF2m
-from GFPoly import GFPoly
+from TP1.GF2m import GF2m
+from TP1.GFPoly import GFPoly
 
 
 def main():

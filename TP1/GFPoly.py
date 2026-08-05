@@ -1,4 +1,4 @@
-from GF2m import GF2m, GFElement
+from TP1.GF2m import GF2m, GFElement
 
 
 class GFPoly:
