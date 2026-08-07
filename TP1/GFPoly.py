@@ -226,6 +226,74 @@ class GFPoly:
             result = result * x + coefficient
 
         return result
+
+    def to_int(self) -> int:
+        """
+            Devuelve la representación entera del polinomio binario.
+
+            Convención:
+                el bit i representa el coeficiente de x^i.
+
+            Ejemplo:
+                x^3 + x + 1
+                coeficientes = [1, 0, 1, 1]
+                máscara      = 0b1011
+
+            Este método sólo es válido para polinomios GF(2)
+        """
+
+        value = 0
+
+        for coefficient in self.coefficients:
+            coefficient_value = int(coefficient)
+
+            value = (value << 1) | coefficient_value
+
+        return value
+
+    def to_string(self) -> str:
+        """
+        Devuelve la representación algebraica del polinomio binario.
+
+        Ejemplos:
+            [1, 0, 1, 1] -> X^3 + X + 1
+            [1, 0, 0]    -> X^2
+            [0]          -> 0
+
+        Este método sólo es válido para polinomios GF(2)
+        """
+
+        terms = []
+        degree = len(self.coefficients) - 1
+
+        for index, coefficient in enumerate(self.coefficients):
+            coefficient_value = int(coefficient)
+
+            if coefficient_value not in (0, 1):
+                raise ValueError(
+                    "El polinomio no pertenece a GF(2): "
+                    "todos sus coeficientes deben ser 0 o 1"
+                )
+
+            # Los términos con coeficiente cero no se imprimen.
+            if coefficient_value == 0:
+                continue
+
+            exponent = degree - index
+
+            if exponent == 0:
+                terms.append("1")
+            elif exponent == 1:
+                terms.append("X")
+            else:
+                terms.append(f"X^{exponent}")
+
+        # Si no se encontró ningún término no nulo,
+        # se trata del polinomio cero.
+        if not terms:
+            return "0"
+
+        return " + ".join(terms)
     
     @classmethod
     def from_roots(cls, field: GF2m, roots: list[GFElement] | tuple[GFElement, ...]) -> "GFPoly":
