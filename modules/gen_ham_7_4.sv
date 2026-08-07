@@ -6,18 +6,19 @@ module gen_ham_7_4 (
     input  logic         i_en
 );
 
-    // Convención:
-    // i_m  = {m0, m1, m2, m3}
-    // o_cw = {m0, m1, m2, m3, p0, p1, p2}
+    // Convenciones:
+    // i_m  = {m3, m2, m1, m0}
+    // o_cw = {m3, m2, m1, m0, p2, p1, p0}
 
     // Matriz generadora:
-    // 
-    //     | 1 0 0 0 | 1 1 0 |
-    //     | 0 1 0 0 | 0 1 1 |
-    // G = | 0 0 1 0 | 1 1 1 |
-    //     | 0 0 0 1 | 1 0 1 |
-    //          I        P
-    
+    //
+    //                p2 p1 p0
+    //     | 1 0 0 0 | 1 1 0 |   <- m3
+    //     | 0 1 0 0 | 0 1 1 |   <- m2
+    // G = | 0 0 1 0 | 1 1 1 |   <- m1
+    //     | 0 0 0 1 | 1 0 1 |   <- m0   
+    //          I4         P
+
     logic [6 : 0] cw_r;
     logic [6 : 0] cw_w;
 
@@ -29,13 +30,12 @@ module gen_ham_7_4 (
         end
     end
 
-    // Bits de información
     assign cw_w[6 : 3] = i_m;
 
     // Bits de paridad
-    assign cw_w[2] = i_m[3] ^ i_m[1] ^ i_m[0]; // p0
-    assign cw_w[1] = i_m[3] ^ i_m[2] ^ i_m[1]; // p1
-    assign cw_w[0] = i_m[2] ^ i_m[1] ^ i_m[0]; // p2
+    assign cw_w[2] = i_m[3] ^ i_m[1] ^ i_m[0]; // p2 = m3 ^ m1 ^ m0
+    assign cw_w[1] = i_m[3] ^ i_m[2] ^ i_m[1]; // p1 = m3 ^ m2 ^ m1
+    assign cw_w[0] = i_m[2] ^ i_m[1] ^ i_m[0]; // p0 = m2 ^ m1 ^ m0
 
     // Salida registrada
     assign o_cw = cw_r;
