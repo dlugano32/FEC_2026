@@ -187,6 +187,11 @@ class GF2m:
 
         current = 1     # alpha^0 = 1
 
+        # Para m >= 2, alpha = x se representa como 0b10. En GF(2), en
+        # cambio, ese valor queda fuera del campo: al reducir x modulo
+        # P(x) = x + 1 se obtiene alpha = 1.
+        alpha = 1 if self.m == 1 else 0b10
+
         for exponent in range(multiplicative_order):
             # Si el valor del logaritmo es distinto a -1 significa que el elemento ya apareció como potencia de alfa
             # Por lo tanto se estaría repitiendo antes de 2^m-1 y el polinomio no es primitivo
@@ -199,7 +204,7 @@ class GF2m:
             log_table[current] = exponent
 
             # Multiplicar por alpha
-            current = self.multiply(current, 0b10)
+            current = self.multiply(current, alpha)
 
         # Si el valor de current, que es una potencia de alpha, volvió a 1 antes de 2^m-1 significa que el polinomio no
         # es primitivo
