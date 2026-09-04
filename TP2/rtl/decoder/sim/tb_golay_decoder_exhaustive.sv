@@ -53,9 +53,8 @@ module tb_golay_decoder_exhaustive();
             checked_count++;
 
             if (expected_uncorrectable[PIPELINE_LATENCY-1]) begin
-                // Cuando o_uncorrectable=1, o_cw, o_msg y o_err no son validos.
+                // Cuando o_uncorrectable=1, o_cw, o_msg y o_err no son validos, por lo que no se chequean
                 if ({o_corrected, o_uncorrectable} !== 2'b01) begin
-                    
                     $error("Uncorrectable: expected flags=01 obtained=%0b%0b", o_corrected, o_uncorrectable);
                     error_count++;
                 end
@@ -82,13 +81,13 @@ module tb_golay_decoder_exhaustive();
     endtask
 
     task automatic shift_pipeline();
-        for (int stage = PIPELINE_LATENCY-1; stage > 0; stage--) begin
-            expected_cw[stage] = expected_cw[stage-1];
-            expected_msg[stage] = expected_msg[stage-1];
-            expected_err[stage] = expected_err[stage-1];
-            expected_corrected[stage] = expected_corrected[stage-1];
-            expected_uncorrectable[stage] = expected_uncorrectable[stage-1];
-            expected_valid[stage] = expected_valid[stage-1];
+        for (int i = PIPELINE_LATENCY-1; i > 0; i--) begin
+            expected_cw[i] = expected_cw[i-1];
+            expected_msg[i] = expected_msg[i-1];
+            expected_err[i] = expected_err[i-1];
+            expected_corrected[i] = expected_corrected[i-1];
+            expected_uncorrectable[i] = expected_uncorrectable[i-1];
+            expected_valid[i] = expected_valid[i-1];
         end
     endtask
 
@@ -141,13 +140,13 @@ module tb_golay_decoder_exhaustive();
         i_rst = 1'b1;
         i_rx = '0;
     
-        for (int stage = 0; stage < PIPELINE_LATENCY; stage++) begin
-            expected_cw[stage] = '0;
-            expected_msg[stage] = '0;
-            expected_err[stage] = '0;
-            expected_corrected[stage] = 1'b0;
-            expected_uncorrectable[stage] = 1'b0;
-            expected_valid[stage] = 1'b0;
+        for (int i = 0; i < PIPELINE_LATENCY; i++) begin
+            expected_cw[i] = '0;
+            expected_msg[i] = '0;
+            expected_err[i] = '0;
+            expected_corrected[i] = 1'b0;
+            expected_uncorrectable[i] = 1'b0;
+            expected_valid[i] = 1'b0;
         end
 
         $readmemh(CODEWORDS_FILE, codewords);
@@ -155,6 +154,8 @@ module tb_golay_decoder_exhaustive();
 
         repeat(2) @(negedge i_clk);
         i_rst = 1'b0;
+
+        flush_pipeline();
 
         $display("# Verificación de las %0d codewords", CODEWORD_COUNT);
 
