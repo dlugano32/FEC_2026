@@ -1,5 +1,10 @@
+from pathlib import Path
+
 from TP1.GF2m import GF2m
 from TP2.ejercicio4 import hamming_weight, matrix_matrix_product, vector_matrix_product
+
+
+CODEWORDS_PATH = Path(__file__).parent / "vectors" / "golay_codewords.hex"
 
 
 B_HEX = [
@@ -113,6 +118,35 @@ def encode(message, k, G, field):
     return vector_matrix_product(message_vector, G)
 
 
+def enumerate_codewords(k, G, field, export_vectors=False):
+    """Enumera las palabras codigo, calcula sus pesos y puede exportarlas."""
+
+    distribution = {}
+    vectors_file = None
+
+    if export_vectors:
+        CODEWORDS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        vectors_file = CODEWORDS_PATH.open("w", encoding="ascii", newline="\n")
+
+    for message in range(2**k):
+        codeword = encode(message, k, G, field)
+        codeword_value = gf2_vector_to_int(codeword)
+        weight = hamming_weight(codeword)
+
+        if vectors_file is not None:
+            vectors_file.write(f"{codeword_value:06X}\n")
+
+        if weight not in distribution:
+            distribution[weight] = 0
+
+        distribution[weight] += 1
+
+    if vectors_file is not None:
+        vectors_file.close()
+
+    return distribution
+
+
 def main():
 
     # Extended Golay Code (24,12)
@@ -163,21 +197,7 @@ def main():
     print("Sindrome nulo: OK")
 
 
-    # Weight distribution
-    distribution = {}
-
-    for message in range(2**k):
-        codeword = encode(message, k, G, gf2)
-        weight = hamming_weight(codeword)
-
-        #codeword_value = gf2_vector_to_int(codeword)
-        #print(f"Codeword[{message:2d}] = "f"{codeword_value:024b}")
-
-        if weight not in distribution:
-            distribution[weight] = 0
-
-        distribution[weight] += 1
-
+    distribution = enumerate_codewords(k, G, gf2, export_vectors=True)
 
     print("Distribucion de pesos:")
     for weight in distribution:

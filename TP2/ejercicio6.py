@@ -1,8 +1,12 @@
 from itertools import combinations
+from pathlib import Path
 
 from TP1.GF2m import GF2m
 from TP2.ejercicio4 import hamming_weight, vector_matrix_product
 from TP2.ejercicio5 import B_HEX, gf2_vector_to_int, identity_matrix, int_to_gf2_vector, transpose
+
+
+SYNDROME_PATH = Path(__file__).parent / "vectors" / "golay_syndromes_w0_w3.hex"
 
 
 def build_matrices(n, k, field):
@@ -35,11 +39,16 @@ def encode(message, k, G, field):
     return vector_matrix_product(message_vector, G)
 
 
-def generate_syndrome_table(n, H, field):
-    """Genera desde H los sindromes de todos los errores de peso 0 a 3"""
+def generate_syndrome_table(n, H, field, export_vectors=False):
+    """Genera la tabla de sindromes y puede exportar {error, sindrome}."""
 
     table = {}
     H_transpose = transpose(H)
+    vectors_file = None
+
+    if export_vectors:
+        SYNDROME_PATH.parent.mkdir(parents=True, exist_ok=True)
+        vectors_file = SYNDROME_PATH.open("w", encoding="ascii", newline="\n")
 
     for weight in range(4):
         for positions in combinations(range(n), weight):
@@ -53,10 +62,17 @@ def generate_syndrome_table(n, H, field):
             syndrome = vector_matrix_product(error, H_transpose)
             syndrome_value = gf2_vector_to_int(syndrome)
 
+            if vectors_file is not None:
+                error_value = gf2_vector_to_int(error)
+                vectors_file.write(f"{error_value:06X}{syndrome_value:03X}\n")
+
             if syndrome_value in table:
                 raise ValueError("Dos errores corregibles tienen el mismo sindrome")
 
             table[syndrome_value] = error
+
+    if vectors_file is not None:
+        vectors_file.close()
 
     return table
 
@@ -128,7 +144,7 @@ def main():
 
     gf2 = GF2m(m=1, primitive_poly=0b1)
     B, G, H = build_matrices(n, k, gf2)
-    syndrome_table = generate_syndrome_table(n, H, gf2)
+    syndrome_table = generate_syndrome_table(n, H, gf2, export_vectors=True)
 
     expected_table_size = 1 + n + n * (n - 1) // 2 + n * (n - 1) * (n - 2) // (2 * 3)
     assert len(syndrome_table) == expected_table_size
