@@ -1,6 +1,6 @@
 `timescale 1ps/1ps
 
-module tb_golay_decoder();
+module tb_golay_decoder_simple();
 
     logic          i_clk;
     logic          i_rst;
